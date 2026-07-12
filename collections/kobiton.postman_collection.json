@@ -1,0 +1,218 @@
+{
+  "info": {
+    "name": "Kobiton REST API",
+    "description": "Programmatic access to the Kobiton mobile device cloud and app testing platform: real-device cloud, test-run sessions and their captured commands, the app repository, data-driven testing data sets, scriptless (no-code) test runs, and organization administration. Base URL: https://api.kobiton.com/v1. Authenticate with HTTP Basic auth using your Kobiton username (or email) and an API key. Scripted automation runs against the separate Appium/WebDriver hub at https://api.kobiton.com/wd/hub.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{kobitonUsername}}", "type": "string" },
+      { "key": "password", "value": "{{kobitonApiKey}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.kobiton.com/v1", "type": "string" },
+    { "key": "kobitonUsername", "value": "", "type": "string" },
+    { "key": "kobitonApiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Devices",
+      "item": [
+        {
+          "name": "List available devices",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/devices?platformName=Android&isOnline=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["devices"],
+              "query": [
+                { "key": "platformName", "value": "Android" },
+                { "key": "isOnline", "value": "true" },
+                { "key": "isBooked", "value": "false", "disabled": true },
+                { "key": "platformVersion", "value": "", "disabled": true },
+                { "key": "deviceName", "value": "", "disabled": true },
+                { "key": "appiumDisabled", "value": "false", "disabled": true },
+                { "key": "groupId", "value": "", "disabled": true }
+              ]
+            },
+            "description": "Returns the private, favorite, and cloud devices the current user can access, with optional filtering."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sessions",
+      "item": [
+        {
+          "name": "Get a session",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/sessions/:sessionId",
+              "host": ["{{baseUrl}}"],
+              "path": ["sessions", ":sessionId"],
+              "variable": [{ "key": "sessionId", "value": "" }]
+            },
+            "description": "Retrieves a test-run session by its Kobiton session ID."
+          }
+        },
+        {
+          "name": "Get session commands",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/sessions/:sessionId/commands?page=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["sessions", ":sessionId", "commands"],
+              "query": [{ "key": "page", "value": "1" }],
+              "variable": [{ "key": "sessionId", "value": "" }]
+            },
+            "description": "Returns the paginated step-by-step commands captured during a session."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scriptless Automation",
+      "item": [
+        {
+          "name": "Start a scriptless automation run",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"exploringSessionIds\": [123456],\n  \"deviceBundleId\": 42\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/revisitPlans/start",
+              "host": ["{{baseUrl}}"],
+              "path": ["revisitPlans", "start"]
+            },
+            "description": "Starts a no-code test run by replaying baseline exploration sessions across a target device bundle."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Apps",
+      "item": [
+        {
+          "name": "Generate a pre-signed app upload URL",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/apps/uploadUrl",
+              "host": ["{{baseUrl}}"],
+              "path": ["apps", "uploadUrl"]
+            },
+            "description": "Returns a pre-signed S3 URL to PUT the app binary to before creating the app/version."
+          }
+        },
+        {
+          "name": "List applications",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/apps", "host": ["{{baseUrl}}"], "path": ["apps"] },
+            "description": "Lists the applications in the app repository."
+          }
+        },
+        {
+          "name": "Create an application or version",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"filename\": \"my-app.apk\",\n  \"appPath\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/apps", "host": ["{{baseUrl}}"], "path": ["apps"] },
+            "description": "Registers a new application or version from a previously uploaded binary."
+          }
+        },
+        {
+          "name": "Get an application",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/apps/:appId",
+              "host": ["{{baseUrl}}"],
+              "path": ["apps", ":appId"],
+              "variable": [{ "key": "appId", "value": "" }]
+            },
+            "description": "Retrieves an application by ID."
+          }
+        },
+        {
+          "name": "Get an application version",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/app/versions/:versionId",
+              "host": ["{{baseUrl}}"],
+              "path": ["app", "versions", ":versionId"],
+              "variable": [{ "key": "versionId", "value": "" }]
+            },
+            "description": "Retrieves an application version by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data Sets",
+      "item": [
+        {
+          "name": "List data sets in a session",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/data-sets", "host": ["{{baseUrl}}"], "path": ["data-sets"] },
+            "description": "Returns the data-driven testing data sets in the specified session."
+          }
+        },
+        {
+          "name": "Create a data set by command ID",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/data-sets/by-command", "host": ["{{baseUrl}}"], "path": ["data-sets", "by-command"] },
+            "description": "Creates a data set targeting a specific command ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Organization",
+      "item": [
+        {
+          "name": "Create an organization member",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/organizations/member", "host": ["{{baseUrl}}"], "path": ["organizations", "member"] },
+            "description": "Creates a new organization member."
+          }
+        },
+        {
+          "name": "Assign a role to an organization member",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/organizations/members/role", "host": ["{{baseUrl}}"], "path": ["organizations", "members", "role"] },
+            "description": "Assigns a role to an organization member."
+          }
+        }
+      ]
+    }
+  ]
+}

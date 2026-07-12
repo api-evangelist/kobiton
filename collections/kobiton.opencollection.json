@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kobiton REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{kobitonUsername}}",
+      "password": "{{kobitonApiKey}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Devices", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List available devices.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/devices",
+            "params": [
+              { "name": "platformName", "value": "Android", "type": "query", "description": "The device platform (Android or iOS)." },
+              { "name": "isOnline", "value": "true", "type": "query", "description": "Whether the device is online." },
+              { "name": "isBooked", "value": "false", "type": "query", "description": "Whether the device is booked." },
+              { "name": "platformVersion", "value": "", "type": "query", "description": "The platform/OS version." },
+              { "name": "deviceName", "value": "", "type": "query", "description": "Device name or comma-separated names." },
+              { "name": "appiumDisabled", "value": "false", "type": "query", "description": "Whether the device can run Appium tests." },
+              { "name": "groupId", "value": "", "type": "query", "description": "Device group ID for organization users." }
+            ]
+          },
+          "docs": "Returns the private, favorite, and cloud devices the current user can access."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Sessions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get a session.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/sessions/:sessionId",
+            "params": [
+              { "name": "sessionId", "value": "", "type": "path", "description": "The Kobiton session ID." }
+            ]
+          },
+          "docs": "Retrieves a test-run session by its Kobiton session ID."
+        },
+        {
+          "info": { "name": "Get session commands.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/sessions/:sessionId/commands",
+            "params": [
+              { "name": "sessionId", "value": "", "type": "path", "description": "The Kobiton session ID." },
+              { "name": "page", "value": "1", "type": "query", "description": "The page of commands to retrieve." }
+            ]
+          },
+          "docs": "Returns the paginated step-by-step commands captured during a session."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Scriptless Automation", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Start a scriptless automation run.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/revisitPlans/start",
+            "body": { "type": "json", "data": "{\n  \"exploringSessionIds\": [123456],\n  \"deviceBundleId\": 42\n}" }
+          },
+          "docs": "Starts a no-code test run by replaying baseline exploration sessions across a target device bundle."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Apps", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Generate a pre-signed app upload URL.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.kobiton.com/v1/apps/uploadUrl" },
+          "docs": "Returns a pre-signed S3 URL to PUT the app binary to before creating the app/version."
+        },
+        {
+          "info": { "name": "List applications.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.kobiton.com/v1/apps" },
+          "docs": "Lists the applications in the app repository."
+        },
+        {
+          "info": { "name": "Create an application or version.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/apps",
+            "body": { "type": "json", "data": "{\n  \"filename\": \"my-app.apk\",\n  \"appPath\": \"\"\n}" }
+          },
+          "docs": "Registers a new application or version from a previously uploaded binary."
+        },
+        {
+          "info": { "name": "Get an application.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/apps/:appId",
+            "params": [ { "name": "appId", "value": "", "type": "path", "description": "The application ID." } ]
+          },
+          "docs": "Retrieves an application by ID."
+        },
+        {
+          "info": { "name": "Get an application version.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/app/versions/:versionId",
+            "params": [ { "name": "versionId", "value": "", "type": "path", "description": "The application version ID." } ]
+          },
+          "docs": "Retrieves an application version by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Data Sets", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List data sets in a session.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.kobiton.com/v1/data-sets" },
+          "docs": "Returns the data-driven testing data sets in the specified session."
+        },
+        {
+          "info": { "name": "Create a data set by command ID.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/data-sets/by-command",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Creates a data set targeting a specific command ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Organization", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create an organization member.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/organizations/member",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Creates a new organization member."
+        },
+        {
+          "info": { "name": "Assign a role to an organization member.", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kobiton.com/v1/organizations/members/role",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Assigns a role to an organization member."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Kobiton
+providerId: kobiton
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Mobile Testing
+- Test Runs
+- Device Cloud
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Kobiton spend. Kobiton is billed as a subscription whose
+  dominant cost driver is testing minutes consumed against the real-device
+  cloud - every manual, scripted (Appium), and scriptless test run draws down a
+  monthly minute allowance tied to the plan (Startup 500, Accelerate 3,000,
+  Scale 7,500). The REST API and Appium hub carry no separate fee; API-driven
+  automation simply consumes the same minutes. Enterprise adds custom-priced
+  capabilities (AI/no-code testing, dedicated or on-prem devices, visual and
+  performance validation). Private/local device management has historically been
+  priced per device slot.
+notes: >-
+  Per-minute overage rates and Enterprise pricing are not reconciled here;
+  verify on the Kobiton pricing page. The biggest optimization lever is reducing
+  wasted device time - end idle sessions, scope scriptless/data-driven runs, and
+  right-size the monthly minute plan to actual test-run volume.
+sources:
+- https://kobiton.com/pricing/
+- https://kobiton.com/
+- https://docs.kobiton.com/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Kobiton
+serviceCategory: Software Testing and Quality Assurance
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Kobiton Mobile Device Cloud
+  ServiceCategory: Software Testing and Quality Assurance
+  ProviderName: Kobiton
+  PublisherName: Kobiton
+  InvoiceIssuerName: Kobiton
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription
+meters:
+- name: testing_minutes
+  description: Minutes of real-device usage consumed by manual, scripted, and scriptless test runs, drawn from the plan allowance.
+  unit: minutes
+  aggregation: sum
+  dimensions:
+  - account
+  - device
+  - session
+- name: device_slots
+  description: Private/local devices managed via Device Lab Management, historically billed per device slot per month.
+  unit: devices
+  aggregation: max
+  dimensions:
+  - account
+- name: subscription_seat
+  description: Plan subscription fee for the account/organization.
+  unit: month
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track testing minutes consumed per session, device, and team; watch for sessions left running idle.
+- name: Allocation
+  description: Attribute test runs to teams/projects (via app assignment and organization members) so minute consumption maps to cost centers.
+- name: Optimization
+  description: End idle sessions, disable idle-quit only when needed, scope scriptless and data-driven runs, and match the monthly minute plan to actual QA volume.
+- name: Accountability
+  description: Assign owners per team/app and review monthly minute burn against the plan allowance before renewing or upgrading tiers.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

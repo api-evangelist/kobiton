@@ -1,0 +1,130 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Kobiton
+providerId: kobiton
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Mobile Testing
+- Test Runs
+- Device Cloud
+- Real Devices
+- Plans
+description: >-
+  Kobiton publishes self-serve subscription plans metered primarily on testing
+  minutes per month against the public real-device cloud, plus a custom
+  Enterprise plan. There is no separate charge for the REST API or the
+  Appium hub - API access is part of the subscription, and the testing minutes
+  you consume through API-driven or portal-driven test runs draw down the same
+  monthly allowance. The figures below were read from the Kobiton pricing page
+  and should be re-verified during reconciliation, as tiers and minute
+  allowances change.
+notes: >-
+  Prices confirmed from kobiton.com/pricing at the time of review: Startup
+  $83/month (500 mins), Accelerate $399/month (3,000 mins), Scale $9,000/year
+  (7,500 mins/month), Enterprise custom. Concurrency limits are not published on
+  the self-serve page. Kobiton has historically also offered Device Lab
+  Management (private/local devices) around $30 per device slot per month - treat
+  that figure as unconfirmed until reconciled.
+sources:
+- https://kobiton.com/pricing/
+- https://kobiton.com/
+- https://docs.kobiton.com/
+plans:
+- id: kobiton-startup
+  name: Startup
+  type: paid
+  description: >-
+    Entry self-serve plan for manual and scripted automation testing on the
+    public real-device cloud, with 500 testing minutes per month.
+  entries:
+  - label: Included Testing Minutes
+    name: startup_minutes
+    type: usage
+    metric: minutes
+    limit: 500
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $83/month
+    userMultiplied: false
+  elements:
+  - name: Public Real-Device Cloud
+  - name: Manual Testing
+  - name: Scripted Automation Testing
+  - name: REST API and Appium Hub Access
+- id: kobiton-accelerate
+  name: Accelerate
+  type: paid
+  description: >-
+    Mid self-serve plan with 3,000 testing minutes per month for teams running
+    more manual and automated test runs on the public cloud.
+  entries:
+  - label: Included Testing Minutes
+    name: accelerate_minutes
+    type: usage
+    metric: minutes
+    limit: 3000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $399/month
+    userMultiplied: false
+  elements:
+  - name: Public Real-Device Cloud
+  - name: Manual Testing
+  - name: Scripted Automation Testing
+  - name: REST API and Appium Hub Access
+- id: kobiton-scale
+  name: Scale
+  type: paid
+  description: >-
+    Higher-volume self-serve plan billed annually, with 7,500 testing minutes
+    per month on the public real-device cloud.
+  entries:
+  - label: Included Testing Minutes
+    name: scale_minutes
+    type: usage
+    metric: minutes
+    limit: 7500
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $9,000/year (annual only)
+    userMultiplied: false
+  elements:
+  - name: Public Real-Device Cloud
+  - name: Manual Testing
+  - name: Scripted Automation Testing
+  - name: REST API and Appium Hub Access
+- id: kobiton-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom plan adding scriptless and AI-driven / no-code testing, self-healing
+    Appium execution, unlimited users, dedicated or on-prem private devices,
+    and visual, accessibility, and performance validations, with priority
+    support. Contact Kobiton for pricing.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Scriptless and No-Code Testing
+  - name: AI-Driven and Self-Healing Automation
+  - name: Visual, Accessibility, and Performance Validation
+  - name: Dedicated / On-Prem Devices
+  - name: Unlimited Users
+  - name: Priority Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

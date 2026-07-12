@@ -1,0 +1,112 @@
+aid: kobiton
+name: Kobiton
+review:
+  question: Does Kobiton expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Kobiton's documented public API surface
+    is request/response REST over HTTPS (https://api.kobiton.com/v1, with a
+    newer v2) plus an Appium/WebDriver hub (https://api.kobiton.com/wd/hub) that
+    speaks the W3C WebDriver protocol over HTTPS. Neither is a server-push
+    transport. Kobiton does stream a live device screen during manual sessions
+    and offers "virtualUSB" for remote device debugging, but those are delivered
+    through the browser portal and a desktop/CLI tunnel application, not through
+    a documented public WebSocket (ws:// or wss://) endpoint that a developer can
+    call. There is no documented server-push API to model.
+findings:
+  summary: |
+    Kobiton does not publish a documented public WebSocket API. Kobiton is a
+    mobile device cloud and app testing platform. Its documented public
+    interfaces are (1) a REST API at https://api.kobiton.com/v1 (a v2 also
+    exists at https://api.kobiton.com/v2) authenticated with HTTP Basic auth
+    (username/email + API key), covering Devices, Sessions and session commands,
+    the App Repository, data-driven testing Data Sets, scriptless automation
+    (revisit plans), and Organization administration; and (2) an
+    Appium/WebDriver automation hub at https://api.kobiton.com/wd/hub for
+    scripted test runs, which is HTTP-based WebDriver, not WebSocket. Kobiton's
+    real-time features - the live manual-session device stream and virtualUSB
+    remote debugging - run through the web portal and a desktop/CLI tunnel
+    client, and are not exposed as a documented public WebSocket endpoint. No
+    ws:// or wss:// developer API is documented as of the review date.
+  realtime: |
+    Kobiton streams a device's screen to the browser during manual/live testing
+    sessions and provides virtualUSB, a desktop application plus CLI that
+    tunnels a remote real device to a developer's machine (accessible in Android
+    Studio / Xcode and via ADB) for debugging. These deliver real-time device
+    interaction, but Kobiton does not document a public WebSocket API for them;
+    they are product features consumed through the portal and the virtualUSB
+    client, not a developer-callable ws:// / wss:// endpoint.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.kobiton.com/v1
+      documented: true
+      note: Primary REST API (Devices, Sessions, Apps, Data Sets, revisit plans, Organization). A v2 also exists at https://api.kobiton.com/v2.
+    - protocol: WebDriver
+      scheme: https
+      baseURL: https://api.kobiton.com/wd/hub
+      documented: true
+      note: Appium / Selenium W3C WebDriver hub for scripted automation. HTTP request/response, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No public WebSocket API is documented. The live manual-session stream and virtualUSB remote debugging are delivered via the portal and a desktop/CLI tunnel client, not a documented developer ws:// / wss:// endpoint.
+  endpointsConfirmedRest:
+    - GET    https://api.kobiton.com/v1/devices
+    - GET    https://api.kobiton.com/v1/sessions/{sessionId}
+    - GET    https://api.kobiton.com/v1/sessions/{sessionId}/commands
+    - POST   https://api.kobiton.com/v1/revisitPlans/start
+    - POST   https://api.kobiton.com/v1/apps/uploadUrl
+    - GET    https://api.kobiton.com/v1/apps
+    - POST   https://api.kobiton.com/v1/apps
+    - DELETE https://api.kobiton.com/v1/apps
+    - GET    https://api.kobiton.com/v1/apps/{appId}
+    - DELETE https://api.kobiton.com/v1/apps/{appId}
+    - PUT    https://api.kobiton.com/v1/apps/{appId}/private
+    - PUT    https://api.kobiton.com/v1/apps/{appId}/public
+    - POST   https://api.kobiton.com/v1/apps/{appId}/team/assign
+    - GET    https://api.kobiton.com/v1/app/versions/{versionId}
+    - DELETE https://api.kobiton.com/v1/app/versions/{versionId}
+    - POST   https://api.kobiton.com/v1/app/versions/{versionId}/tag/{name}
+    - DELETE https://api.kobiton.com/v1/app/versions/{versionId}/tag/{name}
+    - GET    https://api.kobiton.com/v1/data-sets
+    - POST   https://api.kobiton.com/v1/data-sets/by-command
+    - POST   https://api.kobiton.com/v1/data-sets/by-element
+    - PUT    https://api.kobiton.com/v1/data-sets/{dataSetId}/actions/by-command
+    - PUT    https://api.kobiton.com/v1/data-sets/{dataSetId}/actions/by-element
+    - POST   https://api.kobiton.com/v1/organizations/member
+    - PUT    https://api.kobiton.com/v1/organizations/activate/member
+    - PUT    https://api.kobiton.com/v1/organizations/deactivate/member
+    - PUT    https://api.kobiton.com/v1/organizations/members/role
+sources:
+  - url: https://api.kobiton.com/docs
+    type: APIReference
+    note: Kobiton REST API v1 reference; Basic auth (username:apiKey); Apps, Devices, Data Sets, Organization endpoints. No WebSocket documented.
+  - url: https://docs.kobiton.com/
+    type: Documentation
+    note: Platform docs - real device cloud, manual, automation (Appium), scriptless, and visual testing.
+  - url: https://docs.kobiton.com/scriptless-automation/use-rest-api
+    type: Documentation
+    note: Scriptless automation via POST /v1/revisitPlans/start with exploringSessionIds and deviceBundleId.
+  - url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-devices-info
+    type: SourceCode
+    note: Official sample - GET /v1/devices with Basic auth and query filters.
+  - url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-session-data
+    type: SourceCode
+    note: Official sample - get session data and paginated session commands (currentPage/totalPages).
+  - url: https://docs.kobiton.com/debugging/set-up-virtualusb
+    type: Documentation
+    note: virtualUSB is a desktop/CLI tunnel for remote device debugging, not a public WebSocket API.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Kobiton's documented public API is
+    request/response REST (api.kobiton.com/v1, plus a v2) and an HTTP-based
+    Appium/WebDriver hub. Its real-time device features (live manual-session
+    stream, virtualUSB remote debugging) are delivered through the portal and a
+    desktop/CLI tunnel client rather than a documented developer WebSocket
+    endpoint, so no AsyncAPI document was created.

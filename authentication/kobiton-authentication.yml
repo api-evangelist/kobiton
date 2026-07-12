@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/kobiton-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: >-
+    HTTP Basic authentication over HTTPS. Use your Kobiton username (or email)
+    as the username and your Kobiton API key as the password. The pair is
+    base64-encoded and sent in the `Authorization: Basic <encoded>` header (for
+    example, `curl -u <USERNAME>:<API_KEY>`). API keys are created and managed
+    in the Kobiton portal under API Keys settings. The Appium/WebDriver hub at
+    https://api.kobiton.com/wd/hub instead takes the username and API key via
+    Kobiton desired capabilities.
+  sources:
+  - openapi/kobiton-openapi.yml
+  - https://api.kobiton.com/docs
+  - https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-devices-info

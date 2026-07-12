@@ -1,0 +1,217 @@
+aid: kobiton
+url: https://raw.githubusercontent.com/api-evangelist/kobiton/refs/heads/main/apis.yml
+name: Kobiton
+kind: company
+description: Kobiton is a mobile device cloud and app testing platform that lets teams
+  run manual, automated, scriptless, and visual tests against real iOS and Android
+  devices in the cloud (or on privately managed local devices). Its REST API at
+  https://api.kobiton.com/v1 exposes the real device cloud, test sessions and their
+  captured commands, the app repository, data-driven test data sets, and scriptless
+  (no-code) test runs, while an Appium/WebDriver hub at https://api.kobiton.com/wd/hub
+  drives scripted automation. All REST requests authenticate with HTTP Basic auth
+  using a Kobiton username (or email) and an API key.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Mobile Testing
+- Test Runs
+- Device Cloud
+- Real Devices
+- Appium
+- Automation Testing
+- Visual Testing
+- QA
+- Mobile
+created: '2026-07-11'
+modified: '2026-07-11'
+specificationVersion: '0.19'
+apis:
+- aid: kobiton:kobiton-devices-api
+  name: Kobiton Devices API
+  tags:
+  - Device Cloud
+  - Real Devices
+  - Mobile Testing
+  - Device Discovery
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kobiton.com/automation-testing/get-available-devices
+  baseURL: https://api.kobiton.com/v1
+  properties:
+  - url: https://api.kobiton.com/docs
+    type: Documentation
+  - url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-devices-info
+    type: APIReference
+  - url: openapi/kobiton-openapi.yml
+    type: OpenAPI
+  - url: collections/kobiton.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kobiton.opencollection.json
+    type: OpenCollection
+  description: Retrieve the real devices available to your account across the public
+    cloud, your favorites, and your private or local devices. Filter by platform,
+    version, device name, online status, booking status, and Appium availability to
+    find a device to book for a manual or automated test run.
+- aid: kobiton:kobiton-sessions-api
+  name: Kobiton Sessions API
+  tags:
+  - Test Runs
+  - Sessions
+  - Mobile Testing
+  - QA
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kobiton.com/automation-testing/get-a-session-id/using-the-kobiton-api
+  baseURL: https://api.kobiton.com/v1
+  properties:
+  - url: https://api.kobiton.com/docs
+    type: Documentation
+  - url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-session-data
+    type: APIReference
+  - url: openapi/kobiton-openapi.yml
+    type: OpenAPI
+  - url: collections/kobiton.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kobiton.opencollection.json
+    type: OpenCollection
+  description: Read back the results of a test run - fetch a session by ID for its
+    metadata and status, and page through the captured session commands (the step by
+    step log of Appium/WebDriver actions). Each manual or automated test produces a
+    session that can be inspected programmatically for reporting and QA analysis.
+- aid: kobiton:kobiton-scriptless-automation-api
+  name: Kobiton Scriptless Automation API
+  tags:
+  - Test Runs
+  - Scriptless
+  - Visual Testing
+  - No Code
+  - QA
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kobiton.com/scriptless-automation/use-rest-api
+  baseURL: https://api.kobiton.com/v1
+  properties:
+  - url: https://docs.kobiton.com/scriptless-automation/use-rest-api
+    type: Documentation
+  - url: https://api.kobiton.com/docs
+    type: APIReference
+  - url: openapi/kobiton-openapi.yml
+    type: OpenAPI
+  - url: collections/kobiton.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kobiton.opencollection.json
+    type: OpenCollection
+  description: Kick off scriptless (no-code) automated test runs by replaying a
+    baseline manual exploration session across one or more target devices. POST a
+    revisit plan with the baseline session IDs and a device bundle to run the same
+    test steps at scale, the foundation of Kobiton's scriptless and visual test-run
+    workflows.
+- aid: kobiton:kobiton-apps-repository-api
+  name: Kobiton Apps Repository API
+  tags:
+  - App Repository
+  - Uploads
+  - Mobile Testing
+  - Build Management
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kobiton.com/app-repository/app-repository
+  baseURL: https://api.kobiton.com/v1
+  properties:
+  - url: https://api.kobiton.com/docs
+    type: Documentation
+  - url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/upload-app-to-kobiton-apps-repo
+    type: APIReference
+  - url: openapi/kobiton-openapi.yml
+    type: OpenAPI
+  - url: collections/kobiton.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kobiton.opencollection.json
+    type: OpenCollection
+  description: Manage the app builds you test against. Generate a pre-signed upload
+    URL, push a new app or version, list and retrieve apps and versions, tag versions,
+    toggle public/private visibility, assign apps to teams, and delete old builds so
+    every test run targets the right binary.
+- aid: kobiton:kobiton-data-driven-testing-api
+  name: Kobiton Data-Driven Testing API
+  tags:
+  - Data-Driven Testing
+  - Test Runs
+  - Data Sets
+  - QA
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kobiton.com/scriptless-automation/data-driven-testing
+  baseURL: https://api.kobiton.com/v1
+  properties:
+  - url: https://api.kobiton.com/docs
+    type: Documentation
+  - url: https://docs.kobiton.com/scriptless-automation/data-driven-testing
+    type: APIReference
+  - url: openapi/kobiton-openapi.yml
+    type: OpenAPI
+  - url: collections/kobiton.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kobiton.opencollection.json
+    type: OpenCollection
+  description: Drive the same scriptless test run through many input permutations.
+    List the data sets in a session and create or update them by command ID or by
+    element property, so a single baseline test executes across a matrix of data
+    values for broader QA coverage.
+- aid: kobiton:kobiton-appium-automation-hub
+  name: Kobiton Appium Automation Hub
+  tags:
+  - Appium
+  - Automation Testing
+  - WebDriver
+  - Test Runs
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kobiton.com/automation-testing/automation-testing
+  baseURL: https://api.kobiton.com/wd/hub
+  properties:
+  - url: https://docs.kobiton.com/automation-testing/automation-testing
+    type: Documentation
+  - url: https://docs.kobiton.com/automation-testing/capabilities/available-capabilities
+    type: APIReference
+  description: Kobiton's Appium/WebDriver endpoint for scripted mobile automation.
+    Point an Appium or Selenium client at the hub with Kobiton desired capabilities
+    to allocate a real device and execute a scripted test run. This is the standard
+    W3C WebDriver protocol over HTTPS, not a Kobiton-proprietary REST resource.
+- aid: kobiton:kobiton-organization-api
+  name: Kobiton Organization API
+  tags:
+  - Organization
+  - Members
+  - Administration
+  - Teams
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kobiton.com/administration/administration
+  baseURL: https://api.kobiton.com/v1
+  properties:
+  - url: https://api.kobiton.com/docs
+    type: Documentation
+  - url: openapi/kobiton-openapi.yml
+    type: OpenAPI
+  - url: collections/kobiton.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kobiton.opencollection.json
+    type: OpenCollection
+  description: Administer an organization programmatically - create members,
+    activate and deactivate members, and assign roles - so device-cloud access and
+    test-run permissions can be provisioned as code.
+common:
+- type: Authentication
+  url: authentication/kobiton-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/kobiton
+- type: LinkedIn
+  url: https://www.linkedin.com/company/kobiton
+- type: Website
+  url: https://kobiton.com
+- type: Documentation
+  url: https://docs.kobiton.com
+- type: Plans
+  url: plans/kobiton-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/kobiton-rate-limits.yml
+- type: FinOps
+  url: finops/kobiton-finops.yml
+- url: https://kobiton.com/blog
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

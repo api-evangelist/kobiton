@@ -1,0 +1,66 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Kobiton
+providerId: kobiton
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Mobile Testing
+- Test Runs
+- Device Cloud
+- Rate Limiting
+- Quotas
+description: >-
+  Kobiton does not publish fixed numeric request-per-minute rate limits for its
+  REST API. In practice the binding constraint on test throughput is not an API
+  request cap but two account-level limits: the monthly testing-minutes
+  allowance of your plan (500 / 3,000 / 7,500 minutes on the self-serve tiers)
+  and how many real devices you can hold at once. Public-cloud device
+  concurrency is governed by device availability and plan, and a device is
+  exclusively booked for the duration of a manual or automated test run. The
+  Appium hub inherits the same device-booking and minute constraints.
+notes: >-
+  No documented per-endpoint or per-minute REST limit was found as of the review
+  date; the values here describe the real constraints (minutes and device
+  concurrency) rather than a published throttle. Verify current allowances and
+  any concurrency caps on the Kobiton pricing page and portal during
+  reconciliation.
+sources:
+- https://api.kobiton.com/docs
+- https://kobiton.com/pricing/
+- https://docs.kobiton.com/
+responseCodes:
+  throttled: 429
+limits:
+- name: REST API Request Rate
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric per-minute request-rate limit is documented for the REST API.
+- name: Monthly Testing Minutes
+  scope: account
+  metric: minutes
+  limit: per plan (500 / 3,000 / 7,500 self-serve)
+  notes: Test runs (manual, scripted, and scriptless) draw down the plan's monthly minute allowance.
+- name: Device Concurrency
+  scope: account
+  metric: devices
+  limit: governed by plan and device availability
+  notes: A real device is exclusively booked for the duration of a session; concurrent runs need concurrent devices.
+- name: Session Idle Timeout
+  scope: session
+  metric: idle-minutes
+  limit: ~10 minutes (default, adjustable in manual session settings)
+  notes: Manual sessions end after an idle period unless the idle-quit setting is disabled.
+policies:
+- name: Device Booking
+  description: Devices are allocated exclusively per session; release the device promptly to free capacity and stop consuming minutes.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Minute Conservation
+  description: Scope scriptless and data-driven runs and end idle sessions to avoid burning the monthly minute allowance.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
