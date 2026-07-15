@@ -194,6 +194,8 @@ apis:
     activate and deactivate members, and assign roles - so device-cloud access and
     test-run permissions can be provisioned as code.
 common:
+- type: AgenticAccess
+  url: agentic-access/kobiton-agentic-access.yml
 - type: Authentication
   url: authentication/kobiton-authentication.yml
 - type: GitHubOrganization
