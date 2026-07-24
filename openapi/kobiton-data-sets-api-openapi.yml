@@ -1,0 +1,118 @@
+openapi: 3.0.3
+info:
+  title: Kobiton REST Apps Data Sets API
+  description: 'The Kobiton REST API programmatically operates the Kobiton mobile device cloud and app testing platform. It exposes the real device cloud (list and filter available iOS/Android devices), test sessions and their captured commands, the app repository (upload and manage app builds), data-driven testing data sets, scriptless (no-code) test runs via revisit plans, and organization member administration. Scripted automation runs against the separate Appium/WebDriver hub at https://api.kobiton.com/wd/hub and is not modeled here. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) as the user and an API key as the password; the pair is base64-encoded in the Authorization header.
+
+    Endpoints for Devices, Apps, Data Sets, Scriptless Automation (revisit plans), and Organization are grounded in Kobiton''s published API docs and official samples. Session sub-resources (get session, get session commands) are grounded in Kobiton''s get-session-data sample. Request and response schemas below are modeled from the documentation and sample payloads and should be reconciled against the live api.kobiton.com/docs reference; a newer v2 API also exists at https://api.kobiton.com/v2.'
+  version: '1.0'
+  contact:
+    name: Kobiton
+    url: https://kobiton.com
+servers:
+- url: https://api.kobiton.com/v1
+  description: Kobiton REST API v1
+security:
+- basicAuth: []
+tags:
+- name: Data Sets
+  description: Data-driven testing input sets.
+paths:
+  /data-sets:
+    get:
+      operationId: listDataSets
+      tags:
+      - Data Sets
+      summary: List data sets in a session
+      description: Returns the data-driven testing data sets in the specified session.
+      responses:
+        '200':
+          description: The data sets in the session.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /data-sets/by-command:
+    post:
+      operationId: createDataSetByCommand
+      tags:
+      - Data Sets
+      summary: Create a data set by command ID
+      responses:
+        '200':
+          description: The created data set.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /data-sets/by-element:
+    post:
+      operationId: createDataSetByElement
+      tags:
+      - Data Sets
+      summary: Create a data set by element property
+      responses:
+        '200':
+          description: The created data set.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /data-sets/{dataSetId}/actions/by-command:
+    put:
+      operationId: updateDataSetByCommand
+      tags:
+      - Data Sets
+      summary: Update a data set by command ID
+      parameters:
+      - $ref: '#/components/parameters/DataSetId'
+      responses:
+        '200':
+          description: The data set was updated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /data-sets/{dataSetId}/actions/by-element:
+    put:
+      operationId: updateDataSetByElement
+      tags:
+      - Data Sets
+      summary: Update a data set by element property
+      parameters:
+      - $ref: '#/components/parameters/DataSetId'
+      responses:
+        '200':
+          description: The data set was updated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    DataSetId:
+      name: dataSetId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The data set ID.
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Use your Kobiton username (or email) as the username and your Kobiton API key as the password. Create and manage API keys in the Kobiton portal under API Keys settings.

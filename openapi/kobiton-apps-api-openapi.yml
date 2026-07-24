@@ -1,0 +1,265 @@
+openapi: 3.0.3
+info:
+  title: Kobiton REST Apps API
+  description: 'The Kobiton REST API programmatically operates the Kobiton mobile device cloud and app testing platform. It exposes the real device cloud (list and filter available iOS/Android devices), test sessions and their captured commands, the app repository (upload and manage app builds), data-driven testing data sets, scriptless (no-code) test runs via revisit plans, and organization member administration. Scripted automation runs against the separate Appium/WebDriver hub at https://api.kobiton.com/wd/hub and is not modeled here. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) as the user and an API key as the password; the pair is base64-encoded in the Authorization header.
+
+    Endpoints for Devices, Apps, Data Sets, Scriptless Automation (revisit plans), and Organization are grounded in Kobiton''s published API docs and official samples. Session sub-resources (get session, get session commands) are grounded in Kobiton''s get-session-data sample. Request and response schemas below are modeled from the documentation and sample payloads and should be reconciled against the live api.kobiton.com/docs reference; a newer v2 API also exists at https://api.kobiton.com/v2.'
+  version: '1.0'
+  contact:
+    name: Kobiton
+    url: https://kobiton.com
+servers:
+- url: https://api.kobiton.com/v1
+  description: Kobiton REST API v1
+security:
+- basicAuth: []
+tags:
+- name: Apps
+  description: The app repository of builds under test.
+paths:
+  /apps/uploadUrl:
+    post:
+      operationId: createAppUploadUrl
+      tags:
+      - Apps
+      summary: Generate a pre-signed app upload URL
+      description: Returns a pre-signed S3 URL to which the app binary is uploaded with an HTTP PUT before the app or version is created.
+      responses:
+        '200':
+          description: A pre-signed upload URL and app path.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUploadUrl'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apps:
+    get:
+      operationId: listApps
+      tags:
+      - Apps
+      summary: List applications
+      description: Lists the applications in the app repository.
+      responses:
+        '200':
+          description: A list of applications.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createApp
+      tags:
+      - Apps
+      summary: Create an application or version
+      description: Registers a new application or a new version of an existing application from a previously uploaded binary.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppRequest'
+      responses:
+        '200':
+          description: The created application or version.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteApps
+      tags:
+      - Apps
+      summary: Delete multiple applications
+      description: Deletes multiple applications by ID.
+      responses:
+        '204':
+          description: The applications were deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apps/{appId}:
+    get:
+      operationId: getApp
+      tags:
+      - Apps
+      summary: Get an application
+      parameters:
+      - $ref: '#/components/parameters/AppId'
+      responses:
+        '200':
+          description: The application details.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteApp
+      tags:
+      - Apps
+      summary: Delete an application
+      parameters:
+      - $ref: '#/components/parameters/AppId'
+      responses:
+        '204':
+          description: The application was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apps/{appId}/private:
+    put:
+      operationId: makeAppPrivate
+      tags:
+      - Apps
+      summary: Make an application private
+      parameters:
+      - $ref: '#/components/parameters/AppId'
+      responses:
+        '200':
+          description: The application visibility was updated to private.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apps/{appId}/public:
+    put:
+      operationId: makeAppPublic
+      tags:
+      - Apps
+      summary: Make an application public
+      parameters:
+      - $ref: '#/components/parameters/AppId'
+      responses:
+        '200':
+          description: The application visibility was updated to public.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apps/{appId}/team/assign:
+    post:
+      operationId: assignAppToTeams
+      tags:
+      - Apps
+      summary: Assign an application to teams
+      parameters:
+      - $ref: '#/components/parameters/AppId'
+      responses:
+        '200':
+          description: The application was assigned to the specified teams.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/versions/{versionId}:
+    get:
+      operationId: getAppVersion
+      tags:
+      - Apps
+      summary: Get an application version
+      parameters:
+      - $ref: '#/components/parameters/VersionId'
+      responses:
+        '200':
+          description: The application version details.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteAppVersion
+      tags:
+      - Apps
+      summary: Delete an application version
+      parameters:
+      - $ref: '#/components/parameters/VersionId'
+      responses:
+        '204':
+          description: The version was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/versions/{versionId}/tag/{name}:
+    post:
+      operationId: addAppVersionTag
+      tags:
+      - Apps
+      summary: Assign a tag to an app version
+      parameters:
+      - $ref: '#/components/parameters/VersionId'
+      - $ref: '#/components/parameters/TagName'
+      responses:
+        '200':
+          description: The tag was assigned to the version.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: removeAppVersionTag
+      tags:
+      - Apps
+      summary: Remove a tag from an app version
+      parameters:
+      - $ref: '#/components/parameters/VersionId'
+      - $ref: '#/components/parameters/TagName'
+      responses:
+        '204':
+          description: The tag was removed from the version.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    AppUploadUrl:
+      type: object
+      properties:
+        appPath:
+          type: string
+        url:
+          type: string
+          format: uri
+    CreateAppRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+        appPath:
+          type: string
+  parameters:
+    AppId:
+      name: appId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The application ID.
+    VersionId:
+      name: versionId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The application version ID.
+    TagName:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The tag name.
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Use your Kobiton username (or email) as the username and your Kobiton API key as the password. Create and manage API keys in the Kobiton portal under API Keys settings.

@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  title: Kobiton REST Apps Devices API
+  description: 'The Kobiton REST API programmatically operates the Kobiton mobile device cloud and app testing platform. It exposes the real device cloud (list and filter available iOS/Android devices), test sessions and their captured commands, the app repository (upload and manage app builds), data-driven testing data sets, scriptless (no-code) test runs via revisit plans, and organization member administration. Scripted automation runs against the separate Appium/WebDriver hub at https://api.kobiton.com/wd/hub and is not modeled here. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) as the user and an API key as the password; the pair is base64-encoded in the Authorization header.
+
+    Endpoints for Devices, Apps, Data Sets, Scriptless Automation (revisit plans), and Organization are grounded in Kobiton''s published API docs and official samples. Session sub-resources (get session, get session commands) are grounded in Kobiton''s get-session-data sample. Request and response schemas below are modeled from the documentation and sample payloads and should be reconciled against the live api.kobiton.com/docs reference; a newer v2 API also exists at https://api.kobiton.com/v2.'
+  version: '1.0'
+  contact:
+    name: Kobiton
+    url: https://kobiton.com
+servers:
+- url: https://api.kobiton.com/v1
+  description: Kobiton REST API v1
+security:
+- basicAuth: []
+tags:
+- name: Devices
+  description: Real devices available in the Kobiton device cloud.
+paths:
+  /devices:
+    get:
+      operationId: listDevices
+      tags:
+      - Devices
+      summary: List available devices
+      description: Returns all devices the current user can access - public cloud, favorites, and private/local devices - with device metadata. Supports filtering to locate a device to book for a test run.
+      parameters:
+      - name: isOnline
+        in: query
+        schema:
+          type: boolean
+        description: Whether the device is currently online.
+      - name: isBooked
+        in: query
+        schema:
+          type: boolean
+        description: Whether the device is currently booked.
+      - name: platformName
+        in: query
+        schema:
+          type: string
+          enum:
+          - Android
+          - iOS
+        description: The device platform.
+      - name: platformVersion
+        in: query
+        schema:
+          type: string
+        description: The platform / OS version of the device.
+      - name: deviceName
+        in: query
+        schema:
+          type: string
+        description: The device name; accepts an exact name or a comma-separated list of names.
+      - name: appiumDisabled
+        in: query
+        schema:
+          type: boolean
+        description: Filter by whether the device can run Appium automation tests.
+      - name: groupId
+        in: query
+        schema:
+          type: integer
+        description: For organization users, restrict to devices in a device group.
+      responses:
+        '200':
+          description: The devices accessible to the current user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  schemas:
+    Device:
+      type: object
+      properties:
+        id:
+          type: integer
+        deviceName:
+          type: string
+        platformName:
+          type: string
+          enum:
+          - Android
+          - iOS
+        platformVersion:
+          type: string
+        isOnline:
+          type: boolean
+        isBooked:
+          type: boolean
+        udid:
+          type: string
+    DeviceList:
+      type: object
+      description: Devices grouped by source. Modeled from the get-devices-info sample; reconcile exact property names against the live response.
+      properties:
+        privateDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        favoriteDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        cloudDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Use your Kobiton username (or email) as the username and your Kobiton API key as the password. Create and manage API keys in the Kobiton portal under API Keys settings.

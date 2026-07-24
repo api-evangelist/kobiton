@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: Kobiton REST Apps Scriptless Automation API
+  description: 'The Kobiton REST API programmatically operates the Kobiton mobile device cloud and app testing platform. It exposes the real device cloud (list and filter available iOS/Android devices), test sessions and their captured commands, the app repository (upload and manage app builds), data-driven testing data sets, scriptless (no-code) test runs via revisit plans, and organization member administration. Scripted automation runs against the separate Appium/WebDriver hub at https://api.kobiton.com/wd/hub and is not modeled here. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) as the user and an API key as the password; the pair is base64-encoded in the Authorization header.
+
+    Endpoints for Devices, Apps, Data Sets, Scriptless Automation (revisit plans), and Organization are grounded in Kobiton''s published API docs and official samples. Session sub-resources (get session, get session commands) are grounded in Kobiton''s get-session-data sample. Request and response schemas below are modeled from the documentation and sample payloads and should be reconciled against the live api.kobiton.com/docs reference; a newer v2 API also exists at https://api.kobiton.com/v2.'
+  version: '1.0'
+  contact:
+    name: Kobiton
+    url: https://kobiton.com
+servers:
+- url: https://api.kobiton.com/v1
+  description: Kobiton REST API v1
+security:
+- basicAuth: []
+tags:
+- name: Scriptless Automation
+  description: No-code test runs driven by revisit plans.
+paths:
+  /revisitPlans/start:
+    post:
+      operationId: startScriptlessAutomation
+      tags:
+      - Scriptless Automation
+      summary: Start a scriptless automation run
+      description: Starts a scriptless (no-code) automated test run by replaying one or more baseline exploration sessions across a target device bundle. Grounded in the scriptless-automation use-rest-api docs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevisitPlanStartRequest'
+      responses:
+        '200':
+          description: The scriptless run was accepted / started.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  schemas:
+    RevisitPlanStartRequest:
+      type: object
+      description: Grounded in the scriptless-automation use-rest-api docs.
+      properties:
+        exploringSessionIds:
+          type: array
+          items:
+            type: integer
+          description: The baseline exploration session IDs to replay.
+        deviceBundleId:
+          type: integer
+          description: The target device bundle to run the scriptless test on.
+      required:
+      - exploringSessionIds
+      - deviceBundleId
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Use your Kobiton username (or email) as the username and your Kobiton API key as the password. Create and manage API keys in the Kobiton portal under API Keys settings.

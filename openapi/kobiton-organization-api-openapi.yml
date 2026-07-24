@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: Kobiton REST Apps Organization API
+  description: 'The Kobiton REST API programmatically operates the Kobiton mobile device cloud and app testing platform. It exposes the real device cloud (list and filter available iOS/Android devices), test sessions and their captured commands, the app repository (upload and manage app builds), data-driven testing data sets, scriptless (no-code) test runs via revisit plans, and organization member administration. Scripted automation runs against the separate Appium/WebDriver hub at https://api.kobiton.com/wd/hub and is not modeled here. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) as the user and an API key as the password; the pair is base64-encoded in the Authorization header.
+
+    Endpoints for Devices, Apps, Data Sets, Scriptless Automation (revisit plans), and Organization are grounded in Kobiton''s published API docs and official samples. Session sub-resources (get session, get session commands) are grounded in Kobiton''s get-session-data sample. Request and response schemas below are modeled from the documentation and sample payloads and should be reconciled against the live api.kobiton.com/docs reference; a newer v2 API also exists at https://api.kobiton.com/v2.'
+  version: '1.0'
+  contact:
+    name: Kobiton
+    url: https://kobiton.com
+servers:
+- url: https://api.kobiton.com/v1
+  description: Kobiton REST API v1
+security:
+- basicAuth: []
+tags:
+- name: Organization
+  description: Organization member administration.
+paths:
+  /organizations/member:
+    post:
+      operationId: createOrganizationMember
+      tags:
+      - Organization
+      summary: Create an organization member
+      responses:
+        '200':
+          description: The member was created.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /organizations/activate/member:
+    put:
+      operationId: activateOrganizationMember
+      tags:
+      - Organization
+      summary: Activate an organization member
+      responses:
+        '200':
+          description: The member was activated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /organizations/deactivate/member:
+    put:
+      operationId: deactivateOrganizationMember
+      tags:
+      - Organization
+      summary: Deactivate an organization member
+      responses:
+        '200':
+          description: The member was deactivated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /organizations/members/role:
+    put:
+      operationId: assignOrganizationMemberRole
+      tags:
+      - Organization
+      summary: Assign a role to an organization member
+      responses:
+        '200':
+          description: The role was assigned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Use your Kobiton username (or email) as the username and your Kobiton API key as the password. Create and manage API keys in the Kobiton portal under API Keys settings.

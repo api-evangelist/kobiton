@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: Kobiton REST Apps Sessions API
+  description: 'The Kobiton REST API programmatically operates the Kobiton mobile device cloud and app testing platform. It exposes the real device cloud (list and filter available iOS/Android devices), test sessions and their captured commands, the app repository (upload and manage app builds), data-driven testing data sets, scriptless (no-code) test runs via revisit plans, and organization member administration. Scripted automation runs against the separate Appium/WebDriver hub at https://api.kobiton.com/wd/hub and is not modeled here. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) as the user and an API key as the password; the pair is base64-encoded in the Authorization header.
+
+    Endpoints for Devices, Apps, Data Sets, Scriptless Automation (revisit plans), and Organization are grounded in Kobiton''s published API docs and official samples. Session sub-resources (get session, get session commands) are grounded in Kobiton''s get-session-data sample. Request and response schemas below are modeled from the documentation and sample payloads and should be reconciled against the live api.kobiton.com/docs reference; a newer v2 API also exists at https://api.kobiton.com/v2.'
+  version: '1.0'
+  contact:
+    name: Kobiton
+    url: https://kobiton.com
+servers:
+- url: https://api.kobiton.com/v1
+  description: Kobiton REST API v1
+security:
+- basicAuth: []
+tags:
+- name: Sessions
+  description: Test-run sessions and their captured commands.
+paths:
+  /sessions/{sessionId}:
+    get:
+      operationId: getSession
+      tags:
+      - Sessions
+      summary: Get a session
+      description: Retrieves a test-run session by its Kobiton session ID, including device, app, state, and timing metadata. Grounded in the get-session-data sample.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: The session record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Session not found.
+  /sessions/{sessionId}/commands:
+    get:
+      operationId: getSessionCommands
+      tags:
+      - Sessions
+      summary: Get session commands
+      description: Returns the paginated list of commands (the step-by-step Appium / WebDriver actions) captured during a session. Grounded in the get-session-data sample, which shows currentPage / totalPages pagination.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+        description: The page of commands to retrieve.
+      responses:
+        '200':
+          description: A page of session commands.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionCommandsPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    SessionCommandsPage:
+      type: object
+      description: A paginated page of session commands, as shown in the get-session-data sample.
+      properties:
+        currentPage:
+          type: integer
+        totalPages:
+          type: integer
+        commands:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Session:
+      type: object
+      description: A test-run session. Modeled; reconcile against the live get-session response.
+      properties:
+        id:
+          type: integer
+        state:
+          type: string
+        deviceName:
+          type: string
+        platformName:
+          type: string
+        platformVersion:
+          type: string
+        appName:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The Kobiton session ID.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Use your Kobiton username (or email) as the username and your Kobiton API key as the password. Create and manage API keys in the Kobiton portal under API Keys settings.
