@@ -1,0 +1,24 @@
+{
+  "provider": "kobiton",
+  "sources": [
+    "kobiton-apps-api-openapi.yml",
+    "kobiton-data-sets-api-openapi.yml",
+    "kobiton-devices-api-openapi.yml",
+    "kobiton-organization-api-openapi.yml",
+    "kobiton-scriptless-automation-api-openapi.yml",
+    "kobiton-sessions-api-openapi.yml"
+  ],
+  "outputs": [
+    "kobiton-apps-api-openapi.yml",
+    "kobiton-data-sets-api-openapi.yml",
+    "kobiton-devices-api-openapi.yml",
+    "kobiton-organization-api-openapi.yml",
+    "kobiton-scriptless-automation-api-openapi.yml",
+    "kobiton-sessions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
