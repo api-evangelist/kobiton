@@ -1,0 +1,267 @@
+{
+  "item": [
+    {
+      "id": "56656c52-b4f2-4ba6-b01d-dfdd3f2e1074",
+      "name": "Devices",
+      "description": {
+        "content": "Real devices available in the Kobiton device cloud.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f84fb79-b89a-4362-8705-1540d1fe797c",
+          "name": "List available devices",
+          "request": {
+            "name": "List available devices",
+            "description": {
+              "content": "Returns all devices the current user can access - public cloud, favorites, and private/local devices - with device metadata. Supports filtering to locate a device to book for a test run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "devices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "isOnline",
+                  "value": "<boolean>",
+                  "description": "Whether the device is currently online."
+                },
+                {
+                  "disabled": false,
+                  "key": "isBooked",
+                  "value": "<boolean>",
+                  "description": "Whether the device is currently booked."
+                },
+                {
+                  "disabled": false,
+                  "key": "platformName",
+                  "value": "<string>",
+                  "description": "The device platform."
+                },
+                {
+                  "disabled": false,
+                  "key": "platformVersion",
+                  "value": "<string>",
+                  "description": "The platform / OS version of the device."
+                },
+                {
+                  "disabled": false,
+                  "key": "deviceName",
+                  "value": "<string>",
+                  "description": "The device name; accepts an exact name or a comma-separated list of names."
+                },
+                {
+                  "disabled": false,
+                  "key": "appiumDisabled",
+                  "value": "<boolean>",
+                  "description": "Filter by whether the device can run Appium automation tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "groupId",
+                  "value": "<integer>",
+                  "description": "For organization users, restrict to devices in a device group."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3307fbec-ad28-443e-aa2b-dbf884f63eda",
+              "name": "The devices accessible to the current user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isOnline",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "isBooked",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "platformName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platformVersion",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appiumDisabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "groupId",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"privateDevices\": [\n    {\n      \"id\": 5738,\n      \"deviceName\": \"string\",\n      \"platformName\": \"iOS\",\n      \"platformVersion\": \"string\",\n      \"isOnline\": false,\n      \"isBooked\": true,\n      \"udid\": \"string\"\n    },\n    {\n      \"id\": 391,\n      \"deviceName\": \"string\",\n      \"platformName\": \"iOS\",\n      \"platformVersion\": \"string\",\n      \"isOnline\": false,\n      \"isBooked\": false,\n      \"udid\": \"string\"\n    }\n  ],\n  \"favoriteDevices\": [\n    {\n      \"id\": 5011,\n      \"deviceName\": \"string\",\n      \"platformName\": \"iOS\",\n      \"platformVersion\": \"string\",\n      \"isOnline\": true,\n      \"isBooked\": true,\n      \"udid\": \"string\"\n    },\n    {\n      \"id\": 3586,\n      \"deviceName\": \"string\",\n      \"platformName\": \"Android\",\n      \"platformVersion\": \"string\",\n      \"isOnline\": true,\n      \"isBooked\": false,\n      \"udid\": \"string\"\n    }\n  ],\n  \"cloudDevices\": [\n    {\n      \"id\": 7636,\n      \"deviceName\": \"string\",\n      \"platformName\": \"Android\",\n      \"platformVersion\": \"string\",\n      \"isOnline\": false,\n      \"isBooked\": false,\n      \"udid\": \"string\"\n    },\n    {\n      \"id\": 3223,\n      \"deviceName\": \"string\",\n      \"platformName\": \"Android\",\n      \"platformVersion\": \"string\",\n      \"isOnline\": false,\n      \"isBooked\": true,\n      \"udid\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2be75233-67b1-4c3d-a797-515849c059fb",
+              "name": "Authentication failed or was not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isOnline",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "isBooked",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "platformName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platformVersion",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appiumDisabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "groupId",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kobiton.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "570c6ece-0536-4b0d-9155-ea91a61d04d6",
+    "name": "Kobiton REST Apps Devices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Kobiton REST API programmatically operates the Kobiton mobile device cloud and app testing platform. It exposes the real device cloud (list and filter available iOS/Android devices), test sessions and their captured commands, the app repository (upload and manage app builds), data-driven testing data sets, scriptless (no-code) test runs via revisit plans, and organization member administration. Scripted automation runs against the separate Appium/WebDriver hub at https://api.kobiton.com/wd/hub and is not modeled here. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) as the user and an API key as the password; the pair is base64-encoded in the Authorization header.\nEndpoints for Devices, Apps, Data Sets, Scriptless Automation (revisit plans), and Organization are grounded in Kobiton's published API docs and official samples. Session sub-resources (get session, get session commands) are grounded in Kobiton's get-session-data sample. Request and response schemas below are modeled from the documentation and sample payloads and should be reconciled against the live api.kobiton.com/docs reference; a newer v2 API also exists at https://api.kobiton.com/v2.\n\nContact Support:\n Name: Kobiton",
+      "type": "text/plain"
+    }
+  }
+}

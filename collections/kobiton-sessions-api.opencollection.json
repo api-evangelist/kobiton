@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kobiton REST Apps Sessions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/sessions/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "The Kobiton session ID."
+              }
+            ]
+          },
+          "docs": "Retrieves a test-run session by its Kobiton session ID, including device, app, state, and timing metadata. Grounded in the get-session-data sample."
+        },
+        {
+          "info": {
+            "name": "Get session commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/sessions/:sessionId/commands",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "The Kobiton session ID."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of commands to retrieve."
+              }
+            ]
+          },
+          "docs": "Returns the paginated list of commands (the step-by-step Appium / WebDriver actions) captured during a session. Grounded in the get-session-data sample, which shows currentPage / totalPages pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

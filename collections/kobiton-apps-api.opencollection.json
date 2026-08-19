@@ -1,0 +1,256 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kobiton REST Apps API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate a pre-signed app upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/apps/uploadUrl"
+          },
+          "docs": "Returns a pre-signed S3 URL to which the app binary is uploaded with an HTTP PUT before the app or version is created."
+        },
+        {
+          "info": {
+            "name": "List applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/apps"
+          },
+          "docs": "Lists the applications in the app repository."
+        },
+        {
+          "info": {
+            "name": "Create an application or version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/apps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new application or a new version of an existing application from a previously uploaded binary."
+        },
+        {
+          "info": {
+            "name": "Delete multiple applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kobiton.com/v1/apps"
+          },
+          "docs": "Deletes multiple applications by ID."
+        },
+        {
+          "info": {
+            "name": "Get an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/apps/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The application ID."
+              }
+            ]
+          },
+          "docs": "Get an application"
+        },
+        {
+          "info": {
+            "name": "Delete an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kobiton.com/v1/apps/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The application ID."
+              }
+            ]
+          },
+          "docs": "Delete an application"
+        },
+        {
+          "info": {
+            "name": "Make an application private",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kobiton.com/v1/apps/:appId/private",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The application ID."
+              }
+            ]
+          },
+          "docs": "Make an application private"
+        },
+        {
+          "info": {
+            "name": "Make an application public",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kobiton.com/v1/apps/:appId/public",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The application ID."
+              }
+            ]
+          },
+          "docs": "Make an application public"
+        },
+        {
+          "info": {
+            "name": "Assign an application to teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/apps/:appId/team/assign",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The application ID."
+              }
+            ]
+          },
+          "docs": "Assign an application to teams"
+        },
+        {
+          "info": {
+            "name": "Get an application version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/app/versions/:versionId",
+            "params": [
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "path",
+                "description": "The application version ID."
+              }
+            ]
+          },
+          "docs": "Get an application version"
+        },
+        {
+          "info": {
+            "name": "Delete an application version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kobiton.com/v1/app/versions/:versionId",
+            "params": [
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "path",
+                "description": "The application version ID."
+              }
+            ]
+          },
+          "docs": "Delete an application version"
+        },
+        {
+          "info": {
+            "name": "Assign a tag to an app version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/app/versions/:versionId/tag/:name",
+            "params": [
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "path",
+                "description": "The application version ID."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The tag name."
+              }
+            ]
+          },
+          "docs": "Assign a tag to an app version"
+        },
+        {
+          "info": {
+            "name": "Remove a tag from an app version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kobiton.com/v1/app/versions/:versionId/tag/:name",
+            "params": [
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "path",
+                "description": "The application version ID."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The tag name."
+              }
+            ]
+          },
+          "docs": "Remove a tag from an app version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kobiton REST Apps Scriptless Automation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scriptless Automation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start a scriptless automation run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/revisitPlans/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a scriptless (no-code) automated test run by replaying one or more baseline exploration sessions across a target device bundle. Grounded in the scriptless-automation use-rest-api docs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

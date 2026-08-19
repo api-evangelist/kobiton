@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kobiton REST Apps Organization API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an organization member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/organizations/member"
+          },
+          "docs": "Create an organization member"
+        },
+        {
+          "info": {
+            "name": "Activate an organization member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kobiton.com/v1/organizations/activate/member"
+          },
+          "docs": "Activate an organization member"
+        },
+        {
+          "info": {
+            "name": "Deactivate an organization member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kobiton.com/v1/organizations/deactivate/member"
+          },
+          "docs": "Deactivate an organization member"
+        },
+        {
+          "info": {
+            "name": "Assign a role to an organization member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kobiton.com/v1/organizations/members/role"
+          },
+          "docs": "Assign a role to an organization member"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

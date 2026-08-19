@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kobiton REST Apps Data Sets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List data sets in a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/data-sets"
+          },
+          "docs": "Returns the data-driven testing data sets in the specified session."
+        },
+        {
+          "info": {
+            "name": "Create a data set by command ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/data-sets/by-command"
+          },
+          "docs": "Create a data set by command ID"
+        },
+        {
+          "info": {
+            "name": "Create a data set by element property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kobiton.com/v1/data-sets/by-element"
+          },
+          "docs": "Create a data set by element property"
+        },
+        {
+          "info": {
+            "name": "Update a data set by command ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kobiton.com/v1/data-sets/:dataSetId/actions/by-command",
+            "params": [
+              {
+                "name": "dataSetId",
+                "value": "",
+                "type": "path",
+                "description": "The data set ID."
+              }
+            ]
+          },
+          "docs": "Update a data set by command ID"
+        },
+        {
+          "info": {
+            "name": "Update a data set by element property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kobiton.com/v1/data-sets/:dataSetId/actions/by-element",
+            "params": [
+              {
+                "name": "dataSetId",
+                "value": "",
+                "type": "path",
+                "description": "The data set ID."
+              }
+            ]
+          },
+          "docs": "Update a data set by element property"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kobiton REST Apps Devices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kobiton.com/v1/devices",
+            "params": [
+              {
+                "name": "isOnline",
+                "value": "",
+                "type": "query",
+                "description": "Whether the device is currently online."
+              },
+              {
+                "name": "isBooked",
+                "value": "",
+                "type": "query",
+                "description": "Whether the device is currently booked."
+              },
+              {
+                "name": "platformName",
+                "value": "",
+                "type": "query",
+                "description": "The device platform."
+              },
+              {
+                "name": "platformVersion",
+                "value": "",
+                "type": "query",
+                "description": "The platform / OS version of the device."
+              },
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "query",
+                "description": "The device name; accepts an exact name or a comma-separated list of names."
+              },
+              {
+                "name": "appiumDisabled",
+                "value": "",
+                "type": "query",
+                "description": "Filter by whether the device can run Appium automation tests."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "query",
+                "description": "For organization users, restrict to devices in a device group."
+              }
+            ]
+          },
+          "docs": "Returns all devices the current user can access - public cloud, favorites, and private/local devices - with device metadata. Supports filtering to locate a device to book for a test run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
