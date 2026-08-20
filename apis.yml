@@ -63,6 +63,8 @@ apis:
   humanURL: https://docs.kobiton.com/automation-testing/get-available-devices
   baseURL: https://api.kobiton.com/v1
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
@@ -92,6 +94,8 @@ apis:
   humanURL: https://docs.kobiton.com/automation-testing/get-available-devices
   baseURL: https://api.kobiton.com/v1
   tags:
+  - Datasets
+  tags_raw:
   - Data Sets
   properties:
   - type: OpenAPI
