@@ -10,6 +10,18 @@ description: Kobiton is a mobile device cloud and app testing platform that lets
   (no-code) test runs, while an Appium/WebDriver hub at https://api.kobiton.com/wd/hub
   drives scripted automation. All REST requests authenticate with HTTP Basic auth
   using a Kobiton username (or email) and an API key.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
