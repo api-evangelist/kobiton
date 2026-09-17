@@ -100,37 +100,6 @@ apis:
       https://github.com/kobiton/samples/tree/master/kobiton-rest-api/upload-app-to-kobiton-apps-repo
   - type: APIReference
     url: https://docs.kobiton.com/scriptless-automation/data-driven-testing
-- aid: kobiton:kobiton-data-sets-api
-  name: Kobiton Data Sets API
-  description: Data-driven testing input sets.
-  humanURL: https://docs.kobiton.com/automation-testing/get-available-devices
-  baseURL: https://api.kobiton.com/v1
-  tags:
-  - Datasets
-  tags_raw:
-  - Data Sets
-  properties:
-  - type: OpenAPI
-    url: openapi/kobiton-data-sets-api-openapi.yml
-  - type: Documentation
-    url: https://api.kobiton.com/docs
-  - type: APIReference
-    url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-devices-info
-  - type: PostmanCollection
-    url: collections/kobiton.postman_collection.json
-  - type: OpenCollection
-    url: collections/kobiton.opencollection.json
-  - type: APIReference
-    url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-session-data
-  - type: Documentation
-    url: https://docs.kobiton.com/scriptless-automation/use-rest-api
-  - type: APIReference
-    url: https://api.kobiton.com/docs
-  - type: APIReference
-    url: >-
-      https://github.com/kobiton/samples/tree/master/kobiton-rest-api/upload-app-to-kobiton-apps-repo
-  - type: APIReference
-    url: https://docs.kobiton.com/scriptless-automation/data-driven-testing
 - aid: kobiton:kobiton-devices-api
   name: Kobiton Devices API
   description: Real devices available in the Kobiton device cloud.
@@ -228,6 +197,35 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/kobiton-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://api.kobiton.com/docs
+  - type: APIReference
+    url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-devices-info
+  - type: PostmanCollection
+    url: collections/kobiton.postman_collection.json
+  - type: OpenCollection
+    url: collections/kobiton.opencollection.json
+  - type: APIReference
+    url: https://github.com/kobiton/samples/tree/master/kobiton-rest-api/get-session-data
+  - type: Documentation
+    url: https://docs.kobiton.com/scriptless-automation/use-rest-api
+  - type: APIReference
+    url: https://api.kobiton.com/docs
+  - type: APIReference
+    url: >-
+      https://github.com/kobiton/samples/tree/master/kobiton-rest-api/upload-app-to-kobiton-apps-repo
+  - type: APIReference
+    url: https://docs.kobiton.com/scriptless-automation/data-driven-testing
+- aid: kobiton:kobiton-datasets-api
+  name: Kobiton Datasets API
+  description: Data-driven testing input sets.
+  humanURL: https://docs.kobiton.com/automation-testing/automation-testing
+  baseURL: https://api.kobiton.com/wd/hub
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/kobiton-datasets-api-openapi.yml
   - type: Documentation
     url: https://api.kobiton.com/docs
   - type: APIReference
