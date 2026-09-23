@@ -1,12 +1,7 @@
 {
   "provider": "kobiton",
   "sources": [
-    "kobiton-apps-api-openapi.yml",
-    "kobiton-data-sets-api-openapi.yml",
-    "kobiton-devices-api-openapi.yml",
-    "kobiton-organization-api-openapi.yml",
-    "kobiton-scriptless-automation-api-openapi.yml",
-    "kobiton-sessions-api-openapi.yml"
+    "_original/kobiton-openapi.yml"
   ],
   "outputs": [
     "kobiton-apps-api-openapi.yml",
@@ -16,9 +11,23 @@
     "kobiton-scriptless-automation-api-openapi.yml",
     "kobiton-sessions-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "kobiton-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "superseded outputs removed: kobiton-datasets-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 7 total)"
+  ],
+  "skipped": [
+    "kobiton-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kobiton-datasets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kobiton-devices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kobiton-organization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kobiton-scriptless-automation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kobiton-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

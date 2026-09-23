@@ -1,0 +1,31 @@
+# Front Door AI Index — kobiton — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: kobiton
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: kobiton.com
+  final_host: kobiton.com
+  ownership: own
+  owner: kobiton
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 16
+  host_score: 16
+  density: 8.08
+  words: 1979
+  tiers:
+    agentic: 3
+    core: 8
+    model: 5
+  ambiguous: 24
+  top_terms:
+    automation: 21
+    AI: 8
+    Claude: 3
+    agent: 3
+    Gemini: 2
+    copilot: 2
+    prompts: 1
