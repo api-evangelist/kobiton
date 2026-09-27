@@ -72,22 +72,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    DeviceList:
-      type: object
-      description: Devices grouped by source. Modeled from the get-devices-info sample; reconcile exact property names against the live response.
-      properties:
-        privateDevices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
-        favoriteDevices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
-        cloudDevices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
     Device:
       type: object
       properties:
@@ -108,6 +92,22 @@ components:
           type: boolean
         udid:
           type: string
+    DeviceList:
+      type: object
+      description: Devices grouped by source. Modeled from the get-devices-info sample; reconcile exact property names against the live response.
+      properties:
+        privateDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        favoriteDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        cloudDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
   responses:
     Unauthorized:
       description: Authentication failed or was not provided.

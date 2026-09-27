@@ -209,13 +209,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    VersionId:
-      name: versionId
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The application version ID.
     AppId:
       name: appId
       in: path
@@ -223,6 +216,13 @@ components:
       schema:
         type: integer
       description: The application ID.
+    VersionId:
+      name: versionId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The application version ID.
     TagName:
       name: name
       in: path
