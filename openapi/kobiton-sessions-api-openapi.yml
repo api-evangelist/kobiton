@@ -60,20 +60,17 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    SessionCommandsPage:
-      type: object
-      description: A paginated page of session commands, as shown in the get-session-data sample.
-      properties:
-        currentPage:
-          type: integer
-        totalPages:
-          type: integer
-        commands:
-          type: array
-          items:
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
             type: object
-            additionalProperties: true
+            properties:
+              message:
+                type: string
+  schemas:
     Session:
       type: object
       description: A test-run session. Modeled; reconcile against the live get-session response.
@@ -96,6 +93,19 @@ components:
         endTime:
           type: string
           format: date-time
+    SessionCommandsPage:
+      type: object
+      description: A paginated page of session commands, as shown in the get-session-data sample.
+      properties:
+        currentPage:
+          type: integer
+        totalPages:
+          type: integer
+        commands:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
   parameters:
     SessionId:
       name: sessionId
@@ -104,16 +114,6 @@ components:
       schema:
         type: integer
       description: The Kobiton session ID.
-  responses:
-    Unauthorized:
-      description: Authentication failed or was not provided.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
   securitySchemes:
     basicAuth:
       type: http

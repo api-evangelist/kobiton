@@ -91,14 +91,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    DataSetId:
-      name: dataSetId
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The data set ID.
   responses:
     Unauthorized:
       description: Authentication failed or was not provided.
@@ -109,6 +101,14 @@ components:
             properties:
               message:
                 type: string
+  parameters:
+    DataSetId:
+      name: dataSetId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The data set ID.
   securitySchemes:
     basicAuth:
       type: http
