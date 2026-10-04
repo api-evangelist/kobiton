@@ -1,0 +1,46 @@
+slug: kobiton
+provider: Kobiton
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Scriptless Automation
+  spec_file: kobiton-scriptless-automation-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.78
+  evidence: POST /revisitPlans/start — "Start a scriptless automation run"; schema RevisitPlanStartRequest
+  reason: Triggers execution of a no-code automated test plan against the device cloud. This is automated
+    test suite execution, squarely software quality engineering rather than general process automation.
+- tag: Datasets
+  spec_file: kobiton-datasets-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.72
+  evidence: GET /data-sets — "List data sets in a session"; POST /data-sets/by-command — "Create a data
+    set by command ID"
+  reason: Data sets are created from captured test-session commands and element properties to drive data-driven
+    test execution, per the vendor's "data-driven test data sets". This is test asset stewardship, i.e.
+    software quality engineering, not generic data management.
+- tag: Sessions
+  spec_file: kobiton-sessions-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.72
+  evidence: GET /sessions/{sessionId} "Get a session"; GET /sessions/{sessionId}/commands "Get session
+    commands"; schema SessionCommandsPage
+  reason: Sessions here are test sessions on real devices with their captured command logs, used to inspect
+    test execution results. That is test execution and evidence retrieval under software quality engineering,
+    not user login sessions.

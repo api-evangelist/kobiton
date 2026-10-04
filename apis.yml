@@ -246,6 +246,9 @@ apis:
   - type: APIReference
     url: https://docs.kobiton.com/scriptless-automation/data-driven-testing
 common:
+- type: CapabilityMap
+  url: capabilities/kobiton-capability-edges.yml
+  name: Kobiton Business Capability Map
 - type: AgenticAccess
   url: agentic-access/kobiton-agentic-access.yml
 - type: Authentication
