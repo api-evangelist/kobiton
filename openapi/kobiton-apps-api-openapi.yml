@@ -208,22 +208,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    CreateAppRequest:
-      type: object
-      properties:
-        filename:
-          type: string
-        appPath:
-          type: string
-    AppUploadUrl:
-      type: object
-      properties:
-        appPath:
-          type: string
-        url:
-          type: string
-          format: uri
   responses:
     Unauthorized:
       description: Authentication failed or was not provided.
@@ -235,20 +219,6 @@ components:
               message:
                 type: string
   parameters:
-    TagName:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The tag name.
-    VersionId:
-      name: versionId
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The application version ID.
     AppId:
       name: appId
       in: path
@@ -256,6 +226,36 @@ components:
       schema:
         type: integer
       description: The application ID.
+    VersionId:
+      name: versionId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The application version ID.
+    TagName:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The tag name.
+  schemas:
+    AppUploadUrl:
+      type: object
+      properties:
+        appPath:
+          type: string
+        url:
+          type: string
+          format: uri
+    CreateAppRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+        appPath:
+          type: string
   securitySchemes:
     basicAuth:
       type: http
