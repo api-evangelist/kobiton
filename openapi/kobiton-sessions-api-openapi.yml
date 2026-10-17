@@ -60,7 +60,30 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
   schemas:
+    SessionCommandsPage:
+      type: object
+      description: A paginated page of session commands, as shown in the get-session-data sample.
+      properties:
+        currentPage:
+          type: integer
+        totalPages:
+          type: integer
+        commands:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
     Session:
       type: object
       description: A test-run session. Modeled; reconcile against the live get-session response.
@@ -83,29 +106,6 @@ components:
         endTime:
           type: string
           format: date-time
-    SessionCommandsPage:
-      type: object
-      description: A paginated page of session commands, as shown in the get-session-data sample.
-      properties:
-        currentPage:
-          type: integer
-        totalPages:
-          type: integer
-        commands:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-  responses:
-    Unauthorized:
-      description: Authentication failed or was not provided.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
   parameters:
     SessionId:
       name: sessionId
