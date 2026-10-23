@@ -3,6 +3,9 @@ method: searched
 checked:
 - https://plugins.jetbrains.com/
 - atlassian/integrations/atlassian-integration-edges.yml
+- https://landscape.cd.foundation/data/full.json
+- https://plugins.jenkins.io/api/plugin/
+- https://plugins.jenkins.io/api/plugins
 marketplace_apps: []
 edges:
 - partner_name: JetBrains Marketplace
@@ -37,5 +40,24 @@ edges:
   detected: '2026-10-21'
   detected_by: mirror-platform-listings.py
   category: Integrations
+- partner_name: Jenkins (own)
+  partner: jenkins
+  partner_match: mirror
+  mirror_match: register
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://plugins.jenkins.io/kobiton-integration/
+  mirror_of: jenkins/integrations/jenkins-integration-edges.yml
+  apps:
+  - Kobiton (kobiton-integration)
+  listing_count: 1
+  category: Jenkins plugin
+  signal_note: 'publisher side of the all/jenkins listing; vendor-control: kobiton-integration: maintainer account
+    ''kobiton'' is the GitHub organization on all/kobiton''s apis.yml'
+  detected: '2026-10-22'
+  detected_by: sweep-jenkins-cd-foundation-plugins.py
 source:
 - https://plugins.jetbrains.com/
