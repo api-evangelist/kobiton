@@ -1,4 +1,4 @@
-# Kobiton (kobiton)
+# Kobiton
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,107 +64,128 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Kobiton is a mobile device cloud and app testing platform that lets teams run manual, automated, scriptless, and visual tests against real iOS and Android devices in the cloud (or on privately managed local devices). Its REST API at `https://api.kobiton.com/v1` exposes the real device cloud, test-run sessions and their captured commands, the app repository, data-driven test data sets, and scriptless (no-code) test runs. Scripted automation runs against a separate Appium/WebDriver hub at `https://api.kobiton.com/wd/hub`. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) and an API key.
+Kobiton is a mobile device cloud and app testing platform that lets teams run manual, automated, scriptless, and visual tests against real iOS and Android devices in the cloud (or on privately managed local devices). Its REST API at https://api.kobiton.com/v1 exposes the real device cloud, test sessions and their captured commands, the app repository, data-driven test data sets, and scriptless (no-code) test runs, while an Appium/WebDriver hub at https://api.kobiton.com/wd/hub drives scripted automation. All REST requests authenticate with HTTP Basic auth using a Kobiton username (or email) and an API key.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/kobiton/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/kobiton/refs/heads/main/apis.yml)
+**Areas:** Mobile Testing · Test Runs · Device Cloud · Real Devices · Appium · Automation Testing · Visual Testing · QA · Mobile
 
-## Access Model (Honest Notes)
+## Kobiton on APIs.io
 
-- **This is a real, documented public REST API.** Endpoints for Devices, Sessions/session commands, the App Repository, Data Sets, scriptless automation (revisit plans), and Organization administration are grounded in Kobiton's published API reference (`https://api.kobiton.com/docs`) and official code samples (`github.com/kobiton/samples`).
-- **You need a Kobiton account and an API key.** API keys are created in the Kobiton portal under API Keys settings; auth is HTTP Basic (`-u <username>:<apiKey>`).
-- **A newer v2 API exists** at `https://api.kobiton.com/v2` alongside v1. This entry documents the widely-referenced v1 surface; reconcile paths and payloads against the live reference.
-- **Test runs consume plan minutes.** API-driven and portal-driven test runs draw from the same monthly testing-minute allowance; there is no separate API fee.
-- **Modeled vs. confirmed:** endpoint paths and the presence of each resource are grounded in Kobiton docs/samples. Request and response **schemas** in the OpenAPI are modeled from documentation and sample payloads and should be reconciled against the live reference. Items so derived are flagged in the OpenAPI descriptions.
-- **No public WebSocket API.** Kobiton's live manual-session device streaming and virtualUSB remote debugging are delivered through the browser portal and a desktop/CLI tunnel client, not a documented developer WebSocket endpoint. See `review.yml`.
+Everything profiled for Kobiton is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kobiton/](https://apis.io/providers/kobiton/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Mobile Testing
-- Test Runs
-- Device Cloud
-- Real Devices
-- Appium
-- Automation Testing
-- Visual Testing
-- QA
-- Mobile
+- [Kobiton Appium Automation Hub](https://apis.io/apis/kobiton/kobiton-appium-automation-hub/) — Kobiton's Appium/WebDriver endpoint for scripted mobile automation. Point an Appium or Selenium client at the hub with Kobiton desired capabilities to…
+- [Kobiton Apps API](https://apis.io/apis/kobiton/kobiton-apps-api/) — The app repository of builds under test.
+- [Kobiton Devices API](https://apis.io/apis/kobiton/kobiton-devices-api/) — Real devices available in the Kobiton device cloud.
+- [Kobiton Organization API](https://apis.io/apis/kobiton/kobiton-organization-api/) — Organization member administration.
+- [Kobiton Scriptless Automation API](https://apis.io/apis/kobiton/kobiton-scriptless-automation-api/) — No-code test runs driven by revisit plans.
+- [Kobiton Sessions API](https://apis.io/apis/kobiton/kobiton-sessions-api/) — Test-run sessions and their captured commands.
+- [Kobiton Datasets API](https://apis.io/apis/kobiton/kobiton-datasets-api/) — Data-driven testing input sets.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Kobiton Devices API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Retrieve the real devices available to your account across the public cloud, your favorites, and your private or local devices. Filter by platform, version, device name, online status, booking status, and Appium availability to find a device to book for a manual or automated test run.
+- [Kobiton Agentic Access](https://apis.io/agentic-access/kobiton/kobiton-agentic-access/)
 
-- **Human URL:** [https://docs.kobiton.com/automation-testing/get-available-devices](https://docs.kobiton.com/automation-testing/get-available-devices)
-- **Base URL:** `https://api.kobiton.com/v1`
-- **Tags:** Device Cloud, Real Devices, Mobile Testing, Device Discovery
+#### Collections (7)
 
-### Kobiton Sessions API
+Postman and Open Collection request collections.
 
-Read back the results of a test run - fetch a session by ID for its metadata and status, and page through the captured session commands (the step-by-step log of Appium/WebDriver actions). Each manual or automated test produces a session that can be inspected programmatically for reporting and QA analysis.
+- [Kobiton REST API](https://apis.io/collections/kobiton/open-kobiton/)
+- [Kobiton REST Apps API](https://apis.io/collections/kobiton/open-kobiton-apps-api/)
+- [Kobiton REST Apps Data Sets API](https://apis.io/collections/kobiton/open-kobiton-data-sets-api/)
+- [Kobiton REST Apps Devices API](https://apis.io/collections/kobiton/open-kobiton-devices-api/)
+- [Kobiton REST Apps Organization API](https://apis.io/collections/kobiton/open-kobiton-organization-api/)
+- [Kobiton REST Apps Scriptless Automation API](https://apis.io/collections/kobiton/open-kobiton-scriptless-automation-api/)
+- [Kobiton REST Apps Sessions API](https://apis.io/collections/kobiton/open-kobiton-sessions-api/)
 
-- **Human URL:** [https://docs.kobiton.com/automation-testing/get-a-session-id/using-the-kobiton-api](https://docs.kobiton.com/automation-testing/get-a-session-id/using-the-kobiton-api)
-- **Base URL:** `https://api.kobiton.com/v1`
-- **Tags:** Test Runs, Sessions, Mobile Testing, QA
+#### Security (1)
 
-### Kobiton Scriptless Automation API
+Authentication, trust centre, and vulnerability disclosure.
 
-Kick off scriptless (no-code) automated test runs by replaying a baseline manual exploration session across one or more target devices. POST a revisit plan with the baseline session IDs and a device bundle to run the same test steps at scale - the foundation of Kobiton's scriptless and visual test-run workflows.
+- [Kobiton Authentication](https://apis.io/security/kobiton/kobiton-authentication/)
 
-- **Human URL:** [https://docs.kobiton.com/scriptless-automation/use-rest-api](https://docs.kobiton.com/scriptless-automation/use-rest-api)
-- **Base URL:** `https://api.kobiton.com/v1`
-- **Tags:** Test Runs, Scriptless, Visual Testing, No Code, QA
+#### Plans and pricing (1)
 
-### Kobiton Apps Repository API
+Published plans, tiers and prices.
 
-Manage the app builds you test against. Generate a pre-signed upload URL, push a new app or version, list and retrieve apps and versions, tag versions, toggle public/private visibility, assign apps to teams, and delete old builds so every test run targets the right binary.
+- [Kobiton Plans Pricing](https://apis.io/plans/kobiton/kobiton-plans-pricing/)
 
-- **Human URL:** [https://docs.kobiton.com/app-repository/app-repository](https://docs.kobiton.com/app-repository/app-repository)
-- **Base URL:** `https://api.kobiton.com/v1`
-- **Tags:** App Repository, Uploads, Mobile Testing, Build Management
+#### Rate limits (1)
 
-### Kobiton Data-Driven Testing API
+Published request limits.
 
-Drive the same scriptless test run through many input permutations. List the data sets in a session and create or update them by command ID or by element property, so a single baseline test executes across a matrix of data values for broader QA coverage.
+- [Kobiton Rate Limits](https://apis.io/rate-limits/kobiton/kobiton-rate-limits/)
 
-- **Human URL:** [https://docs.kobiton.com/scriptless-automation/data-driven-testing](https://docs.kobiton.com/scriptless-automation/data-driven-testing)
-- **Base URL:** `https://api.kobiton.com/v1`
-- **Tags:** Data-Driven Testing, Test Runs, Data Sets, QA
+#### FinOps (1)
 
-### Kobiton Appium Automation Hub
+What the API costs to run, by operation.
 
-Kobiton's Appium/WebDriver endpoint for scripted mobile automation. Point an Appium or Selenium client at the hub with Kobiton desired capabilities to allocate a real device and execute a scripted test run. This is the standard W3C WebDriver protocol over HTTPS, not a Kobiton-proprietary REST resource.
+- [Kobiton Finops](https://apis.io/finops/kobiton/kobiton-finops/)
 
-- **Human URL:** [https://docs.kobiton.com/automation-testing/automation-testing](https://docs.kobiton.com/automation-testing/automation-testing)
-- **Base URL:** `https://api.kobiton.com/wd/hub`
-- **Tags:** Appium, Automation Testing, WebDriver, Test Runs
+## Where to find this API
 
-### Kobiton Organization API
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-Administer an organization programmatically - create members, activate and deactivate members, and assign roles - so device-cloud access and test-run permissions can be provisioned as code.
-
-- **Human URL:** [https://docs.kobiton.com/administration/administration](https://docs.kobiton.com/administration/administration)
-- **Base URL:** `https://api.kobiton.com/v1`
-- **Tags:** Organization, Members, Administration, Teams
-
-## Common Properties
-
-- [Authentication](authentication/kobiton-authentication.yml)
-- [GitHub Organization](https://github.com/kobiton)
-- [LinkedIn](https://www.linkedin.com/company/kobiton)
 - [Website](https://kobiton.com)
 - [Documentation](https://docs.kobiton.com)
-- [Plans](plans/kobiton-plans-pricing.yml)
-- [Rate Limits](rate-limits/kobiton-rate-limits.yml)
-- [Fin Ops](finops/kobiton-finops.yml)
 - [Blog](https://kobiton.com/blog)
+- [GitHub](https://github.com/kobiton)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 40.3 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kobiton/](https://apis.io/providers/kobiton/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kobiton: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kobiton/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
